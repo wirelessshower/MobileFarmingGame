@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39131f7cd58529d45b6de7815086b9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cropRenderer: {fileID: 7910262675508868205}
 --- !u!1 &8361347663505143477
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class CropTile : MonoBehaviour
 
     [Header("Elements")]
     [SerializeField] private Transform cropParent;
+    [SerializeField] private MeshRenderer tileRenderer;
+    private Crop crop;
     
     void Start()
     {
@@ -16,13 +18,22 @@ public class CropTile : MonoBehaviour
 
     public void Sow(CropData cropData){
         state = TileFieldState.Sown;
-        Crop crop = Instantiate(cropData.cropPrefub, transform.position, Quaternion.identity, cropParent);
+        crop = Instantiate(cropData.cropPrefub, transform.position, Quaternion.identity, cropParent);
 
     }
 
-   
+   public void Water(){
+       state = TileFieldState.Watered;
+       tileRenderer.material.color = Color.white * .3f;
+
+       crop.ScaleUp();
+   }
 
     public bool IsEmpty(){        
          return state == TileFieldState.Empty;
+    }
+
+    public bool IsSown(){
+        return state == TileFieldState.Sown;    
     }
 }
