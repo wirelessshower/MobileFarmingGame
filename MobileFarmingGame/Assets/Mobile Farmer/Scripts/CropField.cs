@@ -10,25 +10,27 @@ public class CropField : MonoBehaviour
     private List<CropTile> cropTiles = new List<CropTile>();
 
     [Header("Settings")]
-    [SerializeField] private CropData cropData; 
+    [SerializeField] private CropData cropData;
     private TileFieldState state;
-    
+
     private int tilesSown;
     private int tilesWaderd;
-    
+    private int tilesHarvested;
+
 
     [Header("Actions")]
     public static Action<CropField> onFullySown;
     public static Action<CropField> onFullyWatered;
-
+    public static Action<CropField> onFullyHarvested;
 
     void Start()
     {
-        state = TileFieldState.Empty;        
+        state = TileFieldState.Empty;
         StoreTiles();
     }
 
-    private void StoreTiles(){
+    private void StoreTiles()
+    {
         for (int i = 0; i < tilesParent.childCount; i++)
             cropTiles.Add(tilesParent.GetChild(i).GetComponent<CropTile>());
     }
@@ -36,13 +38,14 @@ public class CropField : MonoBehaviour
     public void SeedsCollidedCallBack(Vector3[] seedPositions)
     {
 
-        for(int i = 0; i < seedPositions.Length; i++){
-            CropTile closestCropTile = GetClosestCropTile(seedPositions[i]);        
+        for (int i = 0; i < seedPositions.Length; i++)
+        {
+            CropTile closestCropTile = GetClosestCropTile(seedPositions[i]);
 
-            if(closestCropTile == null)
+            if (closestCropTile == null)
                 continue;
 
-            if(!closestCropTile.IsEmpty())
+            if (!closestCropTile.IsEmpty())
                 continue;
 
             Sow(closestCropTile);
@@ -51,24 +54,26 @@ public class CropField : MonoBehaviour
 
     public void WaterColidedCallback(Vector3[] waterPositions)
     {
-        for(int i = 0; i < waterPositions.Length; i++){
+        for (int i = 0; i < waterPositions.Length; i++)
+        {
             CropTile closestCropTile = GetClosestCropTile(waterPositions[i]);
 
-            if(closestCropTile == null)
+            if (closestCropTile == null)
                 continue;
 
-            if(!closestCropTile.IsSown())
+            if (!closestCropTile.IsSown())
                 continue;
 
             Water(closestCropTile);
         }
     }
 
-    private void Water(CropTile cropTile){
+    private void Water(CropTile cropTile)
+    {
         cropTile.Water();
 
         tilesWaderd++;
-        if(tilesWaderd == tilesParent.childCount)
+        if (tilesWaderd == tilesParent.childCount)
             FieldFullyWatered();
     }
 
@@ -77,12 +82,51 @@ public class CropField : MonoBehaviour
         cropTile.Sow(cropData);
         tilesSown++;
 
-        if(tilesSown == tilesParent.childCount)
+        if (tilesSown == tilesParent.childCount)
             FieldFullySown();
 
     }
 
-    private void FieldFullyWatered(){
+    public void Harvest(Transform harvestSphere)
+    {
+        float sphereRadius = harvestSphere.localScale.x;
+
+        for (int i = 0; i < cropTiles.Count; i++)
+        {
+            if (cropTiles[i].IsEmpty())
+                continue;
+
+            float distanceCropTileSphere = Vector3.Distance(harvestSphere.position, cropTiles[i].transform.position);
+
+            if(distanceCropTileSphere < sphereRadius)
+                HarvestTile(cropTiles[i]);
+
+        }
+
+    }
+
+    private void HarvestTile(CropTile cropTile)
+    {
+        cropTile.Harvest();
+
+        tilesHarvested++;
+        if (tilesHarvested == tilesParent.childCount)
+            FieldFullyHarvested();
+    }
+
+    private void FieldFullyHarvested()
+    {
+        tilesSown = 0;
+        tilesWaderd = 0;
+        tilesHarvested = 0;
+        
+        state = TileFieldState.Empty;
+
+        onFullyHarvested?.Invoke(this);
+    }
+
+    private void FieldFullyWatered()
+    {
         Debug.Log("Field fully waterd");
 
         state = TileFieldState.Watered;
@@ -116,24 +160,41 @@ public class CropField : MonoBehaviour
             }
         }
 
-        if(closestCropTileIndex == -1)
+        if (closestCropTileIndex == -1)
             return null;
 
         return cropTiles[closestCropTileIndex];
-    
+
     }
 
-        
-    public bool IsEmpty(){        
+
+    public bool IsEmpty()
+    {
         return state == TileFieldState.Empty;
     }
 
-    public bool IsSown(){
+    public bool IsSown()
+    {
         return state == TileFieldState.Sown;
     }
 
-    public bool IsWatered(){
+    public bool IsWatered()
+    {
         return state == TileFieldState.Watered;
+    }
+
+    [NaughtyAttributes.Button]
+    private void InstantlySowTiles()
+    {
+        for (int i = 0; i < cropTiles.Count; i++)
+            Sow(cropTiles[i]);
+    }
+
+    [NaughtyAttributes.Button]
+    private void InstantlyWaterTiles()
+    {
+        for (int i = 0; i < cropTiles.Count; i++)
+            Water(cropTiles[i]);
     }
 }
 

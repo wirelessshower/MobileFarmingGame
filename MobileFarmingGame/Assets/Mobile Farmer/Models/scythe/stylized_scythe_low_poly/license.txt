@@ -1,0 +1,8 @@
+Model Information:
+* title:	Stylized Scythe (low poly)
+* source:	https://sketchfab.com/3d-models/stylized-scythe-low-poly-47c7d8acd16748c1b421271a1dfcc747
+* author:	WRGY (https://sketchfab.com/WRGY)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
