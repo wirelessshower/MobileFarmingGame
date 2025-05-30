@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 85cae589c09bb234d907a2ea8d0bac98
+timeCreated: 1483530255
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79777
+  packageName: Cartoon Farm Crops
+  packageVersion: 1.0
+  assetPath: Assets/Cartoon_Farm_Crops/Prefabs/Mobile/Pumpkin_Plant.prefab
+  uploadId: 158237

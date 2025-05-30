@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1c8776a0b36cd9a4f813bf0d2d59d109
+timeCreated: 1483530272
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79777
+  packageName: Cartoon Farm Crops
+  packageVersion: 1.0
+  assetPath: Assets/Cartoon_Farm_Crops/Prefabs/Standard/Corn_Plant.prefab
+  uploadId: 158237

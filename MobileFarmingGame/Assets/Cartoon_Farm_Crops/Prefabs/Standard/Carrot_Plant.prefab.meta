@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 56b36da289d9a9e4cb37c5f588e23748
+timeCreated: 1483530270
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79777
+  packageName: Cartoon Farm Crops
+  packageVersion: 1.0
+  assetPath: Assets/Cartoon_Farm_Crops/Prefabs/Standard/Carrot_Plant.prefab
+  uploadId: 158237

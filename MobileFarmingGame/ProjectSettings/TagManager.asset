@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - CropField
+  - Buyer
+  - CoinAmount
+  - ChunkTrigger
   layers:
   - Default
   - TransparentFX

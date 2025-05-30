@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Inventory
 {
     [SerializeField] List<InventoryItem> items = new List<InventoryItem>();
@@ -8,6 +9,43 @@ public class Inventory
 
     public void CropHarvestedCallback(CropType cropType)
     {
-        Debug.Log(cropType + "zarezali");
+        bool cropFound = false;
+        for (int i = 0; i < items.Count; i++)
+        {
+            InventoryItem item = items[i];
+            if (item.cropType == cropType)
+            {
+                item.amount++;
+                cropFound = true;
+                break;
+            }
+        }
+
+        //DebugInventory();
+
+        if (cropFound)
+            return;
+
+        //Create a new item in the list with that crop type
+        items.Add(new InventoryItem(cropType, 1));
+
+    }
+
+    public InventoryItem[] GetInventoryItems()
+    {
+        return items.ToArray();
+    }
+
+    public void Clear()
+    {
+        items.Clear();
+    }
+
+    public void DebugInventory()
+    {
+        foreach (InventoryItem item in items)
+        {
+            Debug.Log($"We have {item.amount} in our {item.cropType} list.");
+        }
     }
 }

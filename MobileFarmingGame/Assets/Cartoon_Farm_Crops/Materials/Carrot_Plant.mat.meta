@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 12cb46c4f90417445acbbf4abb87381f
+timeCreated: 1483529600
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79777
+  packageName: Cartoon Farm Crops
+  packageVersion: 1.0
+  assetPath: Assets/Cartoon_Farm_Crops/Materials/Carrot_Plant.mat
+  uploadId: 158237
